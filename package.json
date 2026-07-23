@@ -1,10 +1,12 @@
 {
   "name": "projet-nutrici2",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "NutriCI - Express + Sequelize (US1-US4)",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,9 +25,11 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mysql2": "^3.23.1",
-    "sequelize": "^6.37.8"
+    "sequelize": "^6.37.8",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.14"
   }
 }

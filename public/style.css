@@ -1,0 +1,79 @@
+:root {
+  --bg: #0f2a24;
+  --accent: #3ecf8e;
+  --text: #f2f7f4;
+  --muted: #a8c0b6;
+  --danger: #ff6b6b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: linear-gradient(160deg, #0b1f1a, #1a3d32 50%, #0f2a24);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+header, main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+header h1 { margin: 0; color: var(--accent); }
+header p { color: var(--muted); }
+
+nav a {
+  color: var(--text);
+  margin-right: 1rem;
+  text-decoration: none;
+}
+
+section {
+  background: rgba(22, 54, 46, 0.85);
+  border: 1px solid #2a564a;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.produit, .ligne-panier, .commande-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #2a564a;
+}
+
+button, select, input {
+  font: inherit;
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #3a6b5c;
+  background: #0f2a24;
+  color: var(--text);
+}
+
+button {
+  background: var(--accent);
+  color: #062018;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+label { display: block; margin: 0.6rem 0; color: var(--muted); }
+.total { font-size: 1.15rem; }
+.message { min-height: 1.4rem; color: var(--accent); }
+.message.erreur { color: var(--danger); }
+
+pre#bon {
+  white-space: pre-wrap;
+  background: #0b1f1a;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #2a564a;
+}

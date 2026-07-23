@@ -32,13 +32,12 @@ bin/
 node_modules/
 .env
 npm-debug.log*
+coverage/
 
-### Maven / Spring Boot ###
+### Maven / Java (ancien) ###
 target/
 *.class
 *.jar
-*.war
-.mvn/wrapper/maven-wrapper.jar
 
 ### Temporaires locaux ###
 _extract_cours.py
