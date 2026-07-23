@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NutriCI — Bon de livraison</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>NutriCI Admin</h1>
+    <p>Generation des bons de livraison</p>
+    <nav>
+      <a href="index.html">Boutique</a>
+      <a href="admin-produits.html">Admin produits</a>
+      <a href="admin-livraison.html">Admin livraison</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Commandes payees</h2>
+      <button id="btn-rafraichir">Rafraichir</button>
+      <div id="liste-commandes"></div>
+    </section>
+
+    <section>
+      <h2>Bon de livraison</h2>
+      <pre id="bon"></pre>
+      <p id="admin-message" class="message"></p>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

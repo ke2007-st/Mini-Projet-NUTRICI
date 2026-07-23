@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NutriCI — Admin produits</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>NutriCI Admin</h1>
+    <p>Gestion des produits et stocks (US3)</p>
+    <nav>
+      <a href="index.html">Boutique</a>
+      <a href="admin-produits.html">Admin produits</a>
+      <a href="admin-livraison.html">Admin livraison</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Ajouter un produit</h2>
+      <label>Reference <input id="reference" maxlength="6" placeholder="COL007"></label>
+      <label>Nom <input id="nom" placeholder="Collagene Marin"></label>
+      <label>Prix <input id="prix" type="number" value="14500"></label>
+      <label>Stock <input id="stock" type="number" value="15"></label>
+      <label>Description <input id="description" placeholder="Description"></label>
+      <label>Categorie
+        <select id="categorie"></select>
+      </label>
+      <button id="btn-ajouter">Ajouter</button>
+      <p id="msg" class="message"></p>
+    </section>
+    <section>
+      <h2>Catalogue</h2>
+      <div id="liste"></div>
+    </section>
+  </main>
+  <script>
+    async function loadCategories() {
+      const cats = await (await fetch('/api/categories')).json();
+      const sel = document.getElementById('categorie');
+      sel.innerHTML = cats.map(c => `<option value="${c.code}">${c.libelle}</option>`).join('');
+    }
+    async function loadProduits() {
+      const produits = await (await fetch('/api/produits')).json();
+      const root = document.getElementById('liste');
+      root.innerHTML = '';
+      produits.forEach(p => {
+        const row = document.createElement('div');
+        row.className = 'produit';
+        row.innerHTML = `<div><strong>${p.nom}</strong><br><small>${p.reference} — stock ${p.qteStock} — ${p.prixUnitaire} FCFA</small></div>
+          <button data-ref="${p.reference}">Supprimer</button>`;
+        row.querySelector('button').onclick = async () => {
+          const res = await fetch('/api/admin/produits/' + p.reference, { method: 'DELETE' });
+          const data = await res.json();
+          document.getElementById('msg').textContent = data.message || data.erreur;
+          loadProduits();
+        };
+        root.appendChild(row);
+      });
+    }
+    document.getElementById('btn-ajouter').onclick = async () => {
+      const body = {
+        reference: document.getElementById('reference').value,
+        nom: document.getElementById('nom').value,
+        prixUnitaire: Number(document.getElementById('prix').value),
+        qteStock: Number(document.getElementById('stock').value),
+        description: document.getElementById('description').value,
+        categorieCode: document.getElementById('categorie').value
+      };
+      const res = await fetch('/api/admin/produits', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      const msg = document.getElementById('msg');
+      if (!res.ok) { msg.className = 'message erreur'; msg.textContent = data.erreur; return; }
+      msg.className = 'message'; msg.textContent = 'Produit ajoute : ' + data.reference;
+      loadProduits();
+    };
+    loadCategories(); loadProduits();
+  </script>
+</body>
+</html>
